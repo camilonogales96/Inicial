@@ -15,12 +15,6 @@
     "sourceMap": true,
     "noEmit": true
   },
-  "include": [
-    "frontend/**/*"
-  ],
-  "exclude": [
-    "node_modules",
-    "backend",
-    "dist"
-  ]
+  "include": ["frontend/**/*"],
+  "exclude": ["node_modules", "backend", "dist"]
 }
