@@ -1,0 +1,168 @@
+================================================================================
+BITÁCORA DE TRABAJO - PROYECTO INICIAL
+================================================================================
+Proyecto: inicial
+Fecha de inicio: 2026-04-10
+Autor: Camilo Baltazar Nogales Fuentes
+
+================================================================================
+DÍA 1: INSTALACIÓN Y CONFIGURACIÓN INICIAL
+================================================================================
+
+FECHA: 2026-04-10
+
+OBJETIVO:
+Configurar el proyecto base con Integración Continua usando Node.js, ESLint 9, 
+Prettier, Husky, Jest y GitHub Actions.
+
+PASOS REALIZADOS:
+
+1. VERIFICACIÓN DE INSTALACIONES
+   --------------------------------
+   Comando ejecutado: node --version
+   Resultado: v20.17.0 ✓
+   
+   Comando ejecutado: npm --version
+   Resultado: 11.3.0 ✓
+   
+   Comando ejecutado: git --version
+   Resultado: 2.46.1.windows.1 ✓
+   
+   Estado: Todas las herramientas instaladas correctamente
+
+2. INICIALIZACIÓN DEL PROYECTO
+   --------------------------------
+   - Crear carpeta del proyecto
+   - Ejecutar: npm init -y
+   - Inicializar repositorio Git: git init
+
+3. INSTALACIÓN DE DEPENDENCIAS
+   --------------------------------
+   Comando ejecutado:
+   npm install --save-dev eslint prettier eslint-config-prettier 
+   eslint-plugin-prettier husky lint-staged jest @eslint/js
+   
+   Paquetes instalados:
+   ✓ eslint@^9.39.4
+   ✓ prettier@^3.8.2
+   ✓ eslint-config-prettier@^10.1.8
+   ✓ eslint-plugin-prettier@^5.5.5
+   ✓ husky@^8.0.0
+   ✓ lint-staged@^16.4.0
+   ✓ jest@^29.7.0
+   ✓ @eslint/js@^9.0.0
+
+4. CONFIGURACIÓN DE ESLINT 9 (FLAT CONFIG)
+   --------------------------------
+   - Crear archivo: eslint.config.js
+   - Configurar reglas recomendadas de ESLint
+   - Integrar Prettier con ESLint
+   - Definir globals para Node.js
+   
+   Problema encontrado: Error de fin de línea (CRLF vs LF) en ci.yml
+   Solución: Aplicar npm run format
+
+5. CONFIGURACIÓN DE PRETTIER
+   --------------------------------
+   - Crear archivo: .prettierrc
+   - Configurar:
+     * printWidth: 90
+     * tabWidth: 2
+     * singleQuote: true
+     * trailingComma: all
+     * endOfLine: lf
+
+6. CONFIGURACIÓN DE HUSKY
+   --------------------------------
+   Comando ejecutado: npx husky-init && npm install
+   
+   Hooks configurados:
+   - pre-commit: ejecuta lint-staged
+   - pre-push: ejecuta npm test
+   
+   Verificación: cat .husky/pre-commit && cat .husky/pre-push
+
+7. CONFIGURACIÓN DE GITHUB ACTIONS
+   --------------------------------
+   - Crear estructura: mkdir -p .github/workflows
+   - Crear archivo: .github/workflows/ci.yml
+   - Configurar matrix strategy: Node 18.x y 20.x
+   - Pasos configurados:
+     * Checkout del código
+     * Setup de Node.js
+     * Instalación de dependencias (npm ci)
+     * Auditoría de seguridad (npm audit)
+     * Verificación de formato (prettier --check)
+     * Linting (eslint)
+     * Type checking (opcional)
+     * Tests (jest)
+     * Build
+
+8. CONFIGURACIÓN DE PACKAGE.JSON
+   --------------------------------
+   Scripts agregados:
+   - "test": "jest"
+   - "lint": "eslint ."
+   - "lint:fix": "eslint . --fix"
+   - "format": "prettier --write ."
+   - "format:check": "prettier --check ."
+   - "build": "echo 'Build step'"
+   - "prepare": "husky install"
+   
+   Sección lint-staged agregada para pre-commit
+
+9. PRIMER COMMIT Y PUSH
+   --------------------------------
+   Comandos ejecutados:
+   git add .
+   git commit -m "add: Configuracion Inicial Proyecto"
+   git push origin main
+   
+   Resultado: ✓ Código subido exitosamente a GitHub
+   URL: https://github.com/TU_USUARIO/inicial
+
+10. VERIFICACIÓN DE GITHUB ACTIONS
+    --------------------------------
+    - Ir a: https://github.com/camilonogales96/Inicial/actions
+    - Workflow "Node.js CI - inicial" ejecutándose
+    - Estado: ✓ Pasó en Node 18.x y 20.x
+
+PROBLEMAS ENCONTRADOS Y SOLUCIONES:
+------------------------------------
+1. Error: "Delete ␍" en eslint.config.js
+   Causa: Fin de línea CRLF (Windows) en lugar de LF (Unix)
+   Solución: Configurar "endOfLine": "lf" en .prettierrc y ejecutar prettier --write
+
+2. Error: "Implicit map keys need to be followed by map values" en ci.yml
+   Causa: Indentación incorrecta en YAML
+   Solución: Corregir espacios (2 espacios por nivel de indentación)
+
+ARCHIVOS CREADOS:
+------------------------------------
+✓ eslint.config.js
+✓ .prettierrc
+✓ .prettierignore
+✓ package.json
+✓ .github/workflows/ci.yml
+✓ .husky/pre-commit
+✓ .husky/pre-push
+✓ bitacora.txt (este archivo)
+✓ reporte-instalacion.txt
+
+ESTADO ACTUAL:
+------------------------------------
+✓ Proyecto configurado y funcionando
+✓ CI/CD activo en GitHub Actions
+✓ Hooks de Husky funcionando
+✓ Código formateado y linteado correctamente
+
+PRÓXIMOS PASOS:
+------------------------------------
+- [ ] Agregar código fuente real del proyecto
+- [ ] Escribir tests unitarios
+- [ ] Configurar SonarQube (opcional)
+- [ ] Agregar badge de CI al README
+
+================================================================================
+FIN DE LA BITÁCORA - DÍA 1
+================================================================================
